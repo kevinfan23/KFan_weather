@@ -4,20 +4,28 @@ if ("geolocation" in navigator) {
     });
 }
 else {
-    getWeather("Los Angeles, CA");
+    getWeather('Los Angeles, CA');
 }
 
 $(document).ready(function() {  
-  setInterval(getWeather, 600000); //Update the weather every 10 minutes.
+  setInterval(getWeather, 7000); //Update the weather every 10 minutes.
 });
 
+function getWeather(location) {	
 
-function getWeather(location) {
+	if (document.getElementById("toggle").checked) {
+		degreeUnit = 'c';
+		location = "Toronto";
+	}
+	else {
+		degreeUnit = 'f';
+		location = "Los Angeles";
+	}
 	
 	$.simpleWeather({
     location: location,
     woeid: '',
-    unit: 'c',
+    unit: document.getElementById("toggle").checked ? 'c' : 'f',
     success: function(weather) {
 	    var city = weather.city;
         var temp = weather.temp + '&deg;';
@@ -25,11 +33,11 @@ function getWeather(location) {
         var wind = '<p>' + weather.wind.speed + '</p><p>' + weather.units.speed + '</p>';
         var humidity = weather.humidity + ' %';
   
-		$(".location").text(city);
+		$(".location").html(city);
         $(".temperature").html(temp);
         $(".climate_bg").html(wcode);
         $(".windspeed").html(wind);
-        $(".humidity").text(humidity);
+        $(".humidity").html(humidity);
     },
     
     error : function(error) {
