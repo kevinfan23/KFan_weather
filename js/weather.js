@@ -1,31 +1,36 @@
+/* Global variables */
+var degreeUnit = 'f';
+var local;
 if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition(function(position) {
-        getWeather(position.coords.latitude + ',' + position.coords.longitude);
+        local = position.coords.latitude + ',' + position.coords.longitude;
+        getWeather(local, degreeUnit);
     });
 }
 else {
-    getWeather('Los Angeles, CA');
+    getWeather('Los Angeles');
 }
 
 $(document).ready(function() {  
-  setInterval(getWeather, 7000); //Update the weather every 10 minutes.
+  setInterval(updateWeather, 3000); //Update the weather every 3000ms.
 });
-
-function getWeather(location) {	
-
+function updateWeather(){
+	/* Update weather */
 	if (document.getElementById("toggle").checked) {
 		degreeUnit = 'c';
-		location = "Toronto";
 	}
 	else {
 		degreeUnit = 'f';
-		location = "Los Angeles";
 	}
-	
+	getWeather(local, degreeUnit);
+}
+
+function getWeather(location, unit) {	
+		
 	$.simpleWeather({
     location: location,
     woeid: '',
-    unit: document.getElementById("toggle").checked ? 'c' : 'f',
+    unit: unit,
     success: function(weather) {
 	    var city = weather.city;
         var temp = weather.temp + '&deg;';

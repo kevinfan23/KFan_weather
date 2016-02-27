@@ -181,7 +181,7 @@ input#toggle + label:before {
   left: 0;
   border-radius: 8px;
   background: rgba(19, 191, 17, 0);
-  transition: all .4s ease;
+  transition: all .1s ease;
   }
 
 input#toggle + label:after {
@@ -197,7 +197,7 @@ input#toggle + label:after {
   border-radius: 8px;
   background: white;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .2), 0 2px 4px rgba(0, 0, 0, .2);
-  transition: all 1s ease;
+  transition: all 0.1s ease;
 }
 
 input#toggle:checked + label:before {
@@ -209,5 +209,5 @@ input#toggle:checked + label:after {
   content: 'C';
   left: 14px;
   box-shadow: inset 0 0 0 1px rgba(19, 191, 17, 1), 0 2px 4px rgba(0, 0, 0, .2);
-  transition: all 1s ease;
+  transition: all .1s ease;
  }
